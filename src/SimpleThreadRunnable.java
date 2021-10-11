@@ -1,24 +1,39 @@
+import java.util.Random;
+
 public class SimpleThreadRunnable implements Runnable {
+
     String name;
-    int snooze;
 
-
-    public SimpleThreadRunnable(String name, int snooze) {
-        this.name = name ;
-        this.snooze = snooze ;
+    public SimpleThreadRunnable(String name) {
+        this.name = name;
     }
 
 
+//    @Override
+//    public void run() {
+//
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println("Thread No.: " +i + " " + name);
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {}
+//        }
+//        System.out.println("Finished all: " + name);
+//    }
+
     @Override
     public void run() {
+        Random random = new Random();
+        long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < 10; i++) {
             System.out.println("Thread No.: " +i + " " + name);
             try {
-//                sleepTime = (int)(Math.random() * 1000);
-                Thread.sleep(snooze);
+                int time = random.nextInt(1000);
+                Thread.sleep(time);
             } catch (InterruptedException e) {}
         }
-        System.out.println("Finished all : " + name);
+        long execTime = System.currentTimeMillis() - startTime;
+        System.out.println("Finished all: " + name + " Thread execution time: " + execTime + " ms");
     }
 }
